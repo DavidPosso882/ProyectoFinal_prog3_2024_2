@@ -1,7 +1,7 @@
 package Clases;
 
 
-public class PersistenciaJson implements Persistencia {
+public class PersistenciaXML implements Persistencia {
 
     @Override
     public void cargarDatos() {
@@ -15,7 +15,7 @@ public class PersistenciaJson implements Persistencia {
 
     public void exportarEstadisticas(String ruta){}
 
-    public PersistenciaJson() {
+    public PersistenciaXML() {
     }
 
 }

@@ -1,7 +1,5 @@
 package Clases;
 
-
-
 import java.time.LocalDateTime;
 
 public class Mensaje {
