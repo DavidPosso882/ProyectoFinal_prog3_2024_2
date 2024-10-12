@@ -63,4 +63,13 @@ public class Vendedor extends Usuario{
     public void setReputacion(double reputacion) {
         this.reputacion = reputacion;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
+                getId(), getNombre(), getApellido(), getDireccion(), getUsername(), getPassword(),
+                productos.toString(), contactos.toString(),
+                muro.toString(), reputacion);
+    }
+
 }

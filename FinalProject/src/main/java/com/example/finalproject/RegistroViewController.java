@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import Clases.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistroViewController {
 
@@ -58,6 +61,39 @@ public class RegistroViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void finalizarRegistro() {
+        // Obtener los datos del formulario
+        String id = txtID.getText();
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String direccion = txtDireccion.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+
+        // Crear un nuevo Vendedor con los datos del formulario
+        List<Producto> productos = new ArrayList<>(); // Inicializa la lista de productos
+        List<Vendedor> contactos = new ArrayList<>(); // Inicializa la lista de contactos
+        Muro muro = new Muro(new ArrayList<>()); // Inicializa el muro
+        double reputacion = 0.0; // Inicializa la reputación
+
+        Vendedor nuevoVendedor = new Vendedor(id, nombre, apellido, direccion, username, password, productos, contactos, muro, reputacion);
+
+        // Persistir los datos del nuevo vendedor
+        Persistencia persistencia = new PersistenciaXML();
+        persistencia.guardarDatos(String.valueOf(nuevoVendedor)); // Guardar el vendedor en formato XML
+
+        // Mostrar mensaje de éxito 
+        System.out.println("Registro exitoso del vendedor: " + nuevoVendedor.getNombre());
+
+        // Cerrar la ventana del formulario de registro
+        Stage stage = (Stage) btnFinalizar.getScene().getWindow();
+        stage.close();
+
+        // Volver a la vista de login
+        volverLogin();
     }
 
 }

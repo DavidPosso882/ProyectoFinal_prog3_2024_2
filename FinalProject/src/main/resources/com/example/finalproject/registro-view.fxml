@@ -50,6 +50,6 @@
       <TextField fx:id="txtUsername" layoutX="235.0" layoutY="315.0" />
       <TextField fx:id="txtPassword" layoutX="235.0" layoutY="359.0" />
       <Button fx:id="btnAtras" layoutX="57.0" layoutY="440.0" mnemonicParsing="false" onAction="#volverLogin" text="Atrás" />
-      <Button fx:id="btnFinalizar" layoutX="357.0" layoutY="440.0" mnemonicParsing="false" text="Finalizar" />
+      <Button fx:id="btnFinalizar" layoutX="357.0" layoutY="440.0" mnemonicParsing="false" onAction="#finalizarRegistro" text="Finalizar" />
    </children>
 </AnchorPane>
