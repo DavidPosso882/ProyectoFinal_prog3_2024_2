@@ -1,9 +1,10 @@
 package Clases;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Producto {
+public class Producto implements Serializable {
     private String id;
     private String nombre;
     private String imagen;
@@ -15,9 +16,17 @@ public class Producto {
     private List<Comentario> comentarios;
     private List<MeGusta> meGusta;
 
-    public void agregarComentario(Comentario comentario){}
-    public void agregarMeGusta(MeGusta meGusta){}
-    public void cambiarEstado(EstadoProducto estado){}
+    public void agregarComentario(Comentario comentario) {
+        comentarios.add(comentario);
+    }
+
+    public void agregarMeGusta(MeGusta meGusta) {
+        this.meGusta.add(meGusta);
+    }
+
+    public void cambiarEstado(EstadoProducto estado) {
+        this.estado = estado;
+    }
 
     public Producto(String id, String nombre, String imagen, Categoria categoria, double precio, EstadoProducto estado, LocalDateTime fechaPublicacion, Vendedor vendedor, List<Comentario> comentarios, List<MeGusta> meGusta) {
         this.id = id;

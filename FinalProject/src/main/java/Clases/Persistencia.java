@@ -1,9 +1,13 @@
 package Clases;
 
-import java.util.List;
-
 public interface Persistencia {
-    void cargarDatos(String tipo);  // tipo puede ser 'xml', 'dat', 'txt'
-    void guardarDatos(String tipo); // para elegir el formato
+    // Metodo para cargar datos
+    void cargarDatos();
+
+    // Metodo para guardar datos
+    void guardarDatos();
+
+    // Metodo para establecer los datos a guardar
+    void setDatos(Object datos);
 }
 

@@ -7,14 +7,35 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
 
 public class RegistroViewController {
+    private static final Logger LOGGER = Logger.getLogger(RegistroViewController.class.getName());
+
+    static {
+        try {
+            // Crear un manejador de archivos para guardar los logs
+            FileHandler fileHandler = new FileHandler("registro_vendedores.log", true);
+
+            // Establecer un formato simple para los logs
+            fileHandler.setFormatter(new SimpleFormatter());
+
+            // Agregar el manejador de archivos al logger
+            LOGGER.addHandler(fileHandler);
+
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error al configurar el logger para archivo", e);
+        }
+    }
 
     @FXML
     private Button btnAtras;
@@ -40,62 +61,86 @@ public class RegistroViewController {
     @FXML
     private TextField txtUsername;
 
+    private SistemaMarketPlace sistema;
+
+    public RegistroViewController() {
+        // Inicializar el sistema
+        this.sistema = SistemaMarketPlace.getInstance();
+    }
+
     @FXML
     void volverLogin() {
         try {
-            // Cargar el FXML de la ventana de login
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Crear la escena y el Stage para la ventana de login
             Stage stage = new Stage();
             stage.setTitle("Proyecto Programación III");
-            stage.setScene(new Scene(root, 641, 488)); // Tamaño del login
-
-            // Mostrar la ventana de login
+            stage.setScene(new Scene(root, 641, 488));
             stage.show();
 
-            // Cerrar la ventana de registro actual
             btnAtras.getScene().getWindow().hide();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error al volver a la pantalla de login", e);
+            mostrarAlerta("Error", "No se pudo abrir la ventana de login.");
         }
     }
 
     @FXML
     void finalizarRegistro() {
-        // Obtener los datos del formulario
-        String id = txtID.getText();
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String direccion = txtDireccion.getText();
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        if (validarCampos()) {
+            String id = txtID.getText();
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            String direccion = txtDireccion.getText();
+            String username = txtUsername.getText();
+            String password = txtPassword.getText();
 
-        // Crear un nuevo Vendedor con los datos del formulario
-        List<Producto> productos = new ArrayList<>(); // Inicializa la lista de productos
-        List<Vendedor> contactos = new ArrayList<>(); // Inicializa la lista de contactos
-        Muro muro = new Muro(new ArrayList<>()); // Inicializa el muro
-        double reputacion = 0.0; // Inicializa la reputación
+            List<Producto> productos = new ArrayList<>();
+            List<Vendedor> contactos = new ArrayList<>();
+            Muro muro = new Muro(new ArrayList<>());
+            double reputacion = 0.0;
 
-        Vendedor nuevoVendedor = new Vendedor(id, nombre, apellido, direccion, username, password, productos, contactos, muro, reputacion);
+            Vendedor nuevoVendedor = new Vendedor(id, nombre, apellido, direccion, username, password, productos, contactos, muro, reputacion);
 
-        // Persistir los datos del nuevo vendedor
-        Persistencia persistencia = new PersistenciaXML();
-        persistencia.guardarDatos(String.valueOf(nuevoVendedor)); // Guardar el vendedor en formato XML
+            try {
+                sistema.registrarVendedor(nuevoVendedor);
+                LOGGER.log(Level.INFO, "Nuevo vendedor registrado: " + nuevoVendedor.getNombre());
+                mostrarAlerta("Éxito", "Registro exitoso del vendedor: " + nuevoVendedor.getNombre());
 
-        // Mostrar mensaje de éxito 
-        System.out.println("Registro exitoso del vendedor: " + nuevoVendedor.getNombre());
+                // Cerrar la ventana del formulario de registro
+                Stage stage = (Stage) btnFinalizar.getScene().getWindow();
+                stage.close();
 
-        // Cerrar la ventana del formulario de registro
-        Stage stage = (Stage) btnFinalizar.getScene().getWindow();
-        stage.close();
-
-        // Volver a la vista de login
-        volverLogin();
+                // Volver a la vista de login
+                volverLogin();
+            } catch (ExcepcionesPersonalizadas.VendedorDuplicadoException e) {
+                LOGGER.log(Level.WARNING, "Intento de registro de vendedor duplicado");
+                mostrarAlerta("Error", "El vendedor ya existe en el sistema.");
+            } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, "Error al registrar el vendedor", e);
+                mostrarAlerta("Error", "No se pudo registrar el vendedor. Por favor, intente nuevamente.");
+            }
+        }
     }
 
+    private boolean validarCampos() {
+        if (txtID.getText().isEmpty() || txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() ||
+                txtDireccion.getText().isEmpty() || txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+            mostrarAlerta("Error", "Todos los campos son obligatorios.");
+            return false;
+        }
+        return true;
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
 }
 
 

@@ -1,6 +1,6 @@
 package Clases;
 
-public class ExcepcionesPersonalizadas{
+public class ExcepcionesPersonalizadas {
 
     public static class VendedorNoEncontradoException extends Exception {
         public VendedorNoEncontradoException(String vendedorId) {
@@ -65,6 +65,13 @@ public class ExcepcionesPersonalizadas{
     public static class ActualizacionPerfilFallidaException extends Exception {
         public ActualizacionPerfilFallidaException(String usuarioId, String razon) {
             super("No se pudo actualizar el perfil del usuario con ID " + usuarioId + ". Razón: " + razon);
+        }
+    }
+
+    // Añadimos la excepción VendedorDuplicadoException (esta es nueva, no la teniamos en la entrega anterior)
+    public static class VendedorDuplicadoException extends Exception {
+        public VendedorDuplicadoException(String vendedorId) {
+            super("Ya existe un vendedor con el ID: " + vendedorId);
         }
     }
 }

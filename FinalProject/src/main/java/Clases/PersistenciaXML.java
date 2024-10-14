@@ -3,80 +3,59 @@ package Clases;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
 import java.io.*;
-import java.util.List;
 
 public class PersistenciaXML implements Persistencia {
-
-    Vendedor vendedor = new Vendedor("123", "David", "Posso", "Calle 123", "DavidNice", "password123", null, null, null, 0.0);
+    private Object datos;
 
     @Override
-    public void guardarDatos(String tipo) {
-        if (tipo.equals("xml")) {
-            try {
-                serializarXml("vendedor.xml", vendedor);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (tipo.equals("dat")) {
-            try {
-                serializarBinario("vendedor.dat", vendedor);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Formato no soportado en PersistenciaXML.");
-        }
+    public void setDatos(Object datos) {
+        this.datos = datos;
     }
 
     @Override
-    public void cargarDatos(String tipo) {
-        if (tipo.equals("xml")) {
+    public void guardarDatos() {
+        if (datos == null) {
+            System.out.println("No hay datos para guardar.");
+            return;
+        }
+        // Utilizamos un hilo para la operación de guardado
+        new Thread(() -> {
             try {
-                Vendedor vendedor = (Vendedor) deserializarXml("vendedor.xml");
-                System.out.println("Datos cargados desde XML: " + vendedor);
+                serializarXml("datos.xml", datos);
+                System.out.println("Datos guardados en XML exitosamente.");
             } catch (IOException e) {
                 e.printStackTrace();
+                System.out.println("Error al guardar datos en XML.");
             }
-        } else if (tipo.equals("dat")) {
+        }).start();
+    }
+
+    @Override
+    public void cargarDatos() {
+        // Utilizamos otro hilo para la operación de carga
+        new Thread(() -> {
             try {
-                Vendedor vendedor = (Vendedor) deserializarBinario("vendedor.dat");
-                System.out.println("Datos cargados desde .dat: " + vendedor);
-            } catch (IOException | ClassNotFoundException e) {
+                Object datosRecuperados = deserializarXml("datos.xml");
+                System.out.println("Datos cargados desde XML: " + datosRecuperados);
+            } catch (IOException e) {
                 e.printStackTrace();
+                System.out.println("Error al cargar datos desde XML.");
             }
-        } else {
-            System.out.println("Formato no soportado en PersistenciaXML.");
-        }
-    }
-
-    // Serializar en formato binario
-    public void serializarBinario(String nombre, Object objeto) throws IOException {
-        ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(nombre));
-        salida.writeObject(objeto);
-        salida.close();
-    }
-
-    // Deserializar en formato binario
-    public Object deserializarBinario(String nombre) throws IOException, ClassNotFoundException {
-        ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(nombre));
-        Object objeto = entrada.readObject();
-        entrada.close();
-        return objeto;
+        }).start();
     }
 
     // Serializar en formato XML
-    public void serializarXml(String nombre, Object objeto) throws IOException {
-        XMLEncoder codificador = new XMLEncoder(new FileOutputStream(nombre));
-        codificador.writeObject(objeto);
-        codificador.close();
+    private void serializarXml(String nombre, Object objeto) throws IOException {
+        try (XMLEncoder codificador = new XMLEncoder(new FileOutputStream(nombre))) {
+            codificador.writeObject(objeto);
+        }
     }
 
     // Deserializar en formato XML
-    public Object deserializarXml(String nombre) throws IOException {
-        XMLDecoder decodificador = new XMLDecoder(new FileInputStream(nombre));
-        Object objeto = decodificador.readObject();
-        decodificador.close();
-        return objeto;
+    private Object deserializarXml(String nombre) throws IOException {
+        try (XMLDecoder decodificador = new XMLDecoder(new FileInputStream(nombre))) {
+            return decodificador.readObject();
+        }
     }
 }
 

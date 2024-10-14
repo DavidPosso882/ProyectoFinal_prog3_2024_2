@@ -14,13 +14,13 @@ public class Publicacion {
     public void agregarComentarios(Comentario comentario) {}
     public void agregarMegusta(MeGusta meGusta) {}
 
-    public Publicacion(String id, String contenido, String fecha, Vendedor autor, List<Comentario> comentarios, List<MeGusta> meGustas) {
+    public Publicacion() {
         this.id = id;
         this.contenido = contenido;
         this.fecha = fecha;
         this.autor = autor;
         this.comentarios = comentarios;
-        this.meGusta = meGustas;
+        this.meGusta = meGusta;
     }
 
     public String getId() {
