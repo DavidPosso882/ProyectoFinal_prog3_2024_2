@@ -1,8 +1,8 @@
 package Clases;
 
 import java.util.List;
-import java.util.Map;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -14,15 +14,24 @@ public class SistemaMarketPlace {
     private List<Administrador> administradorList;
     private Persistencia persistencia;
 
-    private SistemaMarketPlace(List<Vendedor> vendedorList, List<Administrador> administradorList, Persistencia persistencia) {
-        this.vendedorList = vendedorList;
-        this.administradorList = administradorList;
-        this.persistencia = persistencia;
+    private SistemaMarketPlace() {
+        this.persistencia = new PersistenciaXML();
+        this.persistencia.cargarDatos();
+        try {
+            ((PersistenciaXML) this.persistencia).esperarCargaDatos();
+            this.vendedorList = (List<Vendedor>) ((PersistenciaXML) this.persistencia).getDatos();
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.SEVERE, "Error al esperar la carga de datos", e);
+        }
+        if (this.vendedorList == null) {
+            this.vendedorList = new ArrayList<>();
+        }
+        this.administradorList = new ArrayList<>();
     }
 
     public static synchronized SistemaMarketPlace getInstance() {
         if (instance == null) {
-            instance = new SistemaMarketPlace(new ArrayList<>(), new ArrayList<>(), new PersistenciaXML());
+            instance = new SistemaMarketPlace();
         }
         return instance;
     }
@@ -78,6 +87,8 @@ public class SistemaMarketPlace {
 
     public void setVendedorList(List<Vendedor> vendedorList) {
         this.vendedorList = vendedorList;
+        persistencia.setDatos(vendedorList);
+        persistencia.guardarDatos();
     }
 
     public List<Administrador> getAdministradorList() {

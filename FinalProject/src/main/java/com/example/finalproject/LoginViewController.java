@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import Clases.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,43 +27,74 @@ public class LoginViewController {
     private ToggleButton tglBtn;
 
     @FXML
+    private Button btnIniciarSesion;
+
+    private SistemaMarketPlace sistema;
+
+    public LoginViewController() {
+        // Inicializar el sistema
+        this.sistema = SistemaMarketPlace.getInstance();
+    }
+
+    @FXML
     void irFormulario() {
         try {
-            // Cargar el FXML de la ventana de registro
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("registro-view.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Crear el Stage y Scene para la ventana de registro
             Stage stage = new Stage();
             stage.setTitle("Formulario de Registro");
-            stage.setScene(new Scene(root, 489, 493)); // Tamaño de la ventana de registro
-
-            // Mostrar la ventana de registro
+            stage.setScene(new Scene(root, 489, 493));
             stage.show();
 
-            // Cerrar la ventana de login actual
             btnRegistro.getScene().getWindow().hide();
 
         } catch (IOException e) {
             e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo abrir la ventana de registro.");
         }
     }
 
     @FXML
     public void cambiarEstadoPass() {
         if (tglBtn.isSelected()) {
-            // Mostrar la contraseña en el TextField
             textField.setText(passField.getText());
             textField.setVisible(true);
             passField.setVisible(false);
             tglBtn.setText("Ocultar");
         } else {
-            // Volver a ocultar la contraseña en el PasswordField
             passField.setText(textField.getText());
             passField.setVisible(true);
             textField.setVisible(false);
             tglBtn.setText("Mostrar");
         }
+    }
+
+    @FXML
+    void iniciarSesion() {
+        String username = textField.isVisible() ? textField.getText() : passField.getText();
+        String password = passField.isVisible() ? passField.getText() : textField.getText();
+
+        try {
+            Usuario usuario = sistema.autenticarUsuario(username, password);
+            if (usuario instanceof Vendedor) {
+                mostrarAlerta("Éxito", "Inicio de sesión exitoso como Vendedor.");
+                // Aquí se agrega la lógica para abrir la vista del vendedor
+            } else if (usuario instanceof Administrador) {
+                mostrarAlerta("Éxito", "Inicio de sesión exitoso como Administrador.");
+                // Aquí se agrega la lógica para abrir la vista del administrador
+            }
+        } catch (ExcepcionesPersonalizadas.AutenticacionFallidaException e) {
+            mostrarAlerta("Error", "Autenticación fallida. Verifique sus credenciales.");
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
 

@@ -1,8 +1,9 @@
 package Clases;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Publicacion {
+public class Publicacion implements Serializable {
 
     private String id;
     private String contenido;
