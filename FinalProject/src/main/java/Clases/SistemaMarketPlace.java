@@ -1,5 +1,6 @@
 package Clases;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -27,10 +28,14 @@ public class SistemaMarketPlace {
         return instance;
     }
 
-    public void registrarVendedor(Vendedor vendedor) throws ExcepcionesPersonalizadas.VendedorDuplicadoException {
+    public void registrarVendedor(Vendedor vendedor) throws ExcepcionesPersonalizadas.VendedorDuplicadoException, IOException {
+        PersistenciaXML p=new PersistenciaXML();
+        vendedorList= (List<Vendedor>) p.deserializarXml("datos.xml");
+
         if (vendedorList.stream().anyMatch(v -> v.getId().equals(vendedor.getId()))) {
             throw new ExcepcionesPersonalizadas.VendedorDuplicadoException(vendedor.getId());
         }
+
         vendedorList.add(vendedor);
         persistencia.setDatos(vendedorList);
         persistencia.guardarDatos();

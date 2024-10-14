@@ -3,8 +3,17 @@ package Clases;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
 import java.io.*;
+import java.util.ArrayList;
 
 public class PersistenciaXML implements Persistencia {
+
+    public PersistenciaXML(Object datos) {
+        this.datos = datos;
+    }
+
+    public PersistenciaXML() {
+    }
+
     private Object datos;
 
     @Override
@@ -21,6 +30,8 @@ public class PersistenciaXML implements Persistencia {
         // Utilizamos un hilo para la operación de guardado
         new Thread(() -> {
             try {
+                //ArrayList<Vendedor> vendedores=(ArrayList<Vendedor>) deserializarXml("datos.xml");
+                //vendedores.add((Vendedor) datos);
                 serializarXml("datos.xml", datos);
                 System.out.println("Datos guardados en XML exitosamente.");
             } catch (IOException e) {
@@ -45,14 +56,14 @@ public class PersistenciaXML implements Persistencia {
     }
 
     // Serializar en formato XML
-    private void serializarXml(String nombre, Object objeto) throws IOException {
+    public  void serializarXml(String nombre, Object objeto) throws IOException {
         try (XMLEncoder codificador = new XMLEncoder(new FileOutputStream(nombre))) {
             codificador.writeObject(objeto);
         }
     }
 
     // Deserializar en formato XML
-    private Object deserializarXml(String nombre) throws IOException {
+    public  Object deserializarXml(String nombre) throws IOException {
         try (XMLDecoder decodificador = new XMLDecoder(new FileInputStream(nombre))) {
             return decodificador.readObject();
         }
