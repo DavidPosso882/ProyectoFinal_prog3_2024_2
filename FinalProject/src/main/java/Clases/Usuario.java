@@ -21,6 +21,9 @@ public abstract class Usuario implements Serializable {
         this.password = password;
     }
 
+    public Usuario() {
+    }
+
     public String getId() {
         return id;
     }

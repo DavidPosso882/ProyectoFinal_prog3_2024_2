@@ -68,6 +68,9 @@ public class Vendedor extends Usuario implements Serializable {
         this.reputacion = reputacion;
     }
 
+    public Vendedor() {
+    }
+
     public List<Producto> getProductos() {
         return productos;
     }
