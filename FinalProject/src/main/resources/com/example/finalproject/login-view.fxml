@@ -12,61 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="488.0" prefWidth="641.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalproject.LoginViewController">
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-   <children>
-      <AnchorPane prefHeight="409.0" prefWidth="601.0">
-         <children>
-            <Label layoutX="80.0" layoutY="198.0" prefWidth="68.0" text="Usuario">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="190.0" layoutY="14.0" text="Marketplace Login" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="220.0" layoutY="369.0" text="¿Olvidaste tu contraseña?" textFill="#1f3bee" />
-            <TextField fx:id="txtUsuario" layoutX="190.0" layoutY="196.0" prefHeight="24.0" prefWidth="221.0" />
-            <Button fx:id="btnInicioSesion" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="309.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: #3359ff;" text="Iniciar Sesión" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../Imagenes/UQ.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnRegistro" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="309.0" mnemonicParsing="false" onAction="#irFormulario" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: blue;" text="Registrarse" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Button>
-
-            <!-- PasswordField para ocultar la contraseña -->
-            <PasswordField fx:id="passField" layoutX="190.0" layoutY="237.0" prefHeight="24.0" prefWidth="221.0" visible="true" />
-
-            <!-- TextField para mostrar la contraseña (inicialmente invisible) -->
-            <TextField fx:id="textField" layoutX="190.0" layoutY="237.0" prefHeight="24.0" prefWidth="221.0" visible="false" />
-
-            <ToggleButton fx:id="tglBtn" layoutX="411.0" layoutY="237.0" mnemonicParsing="false" onAction="#cambiarEstadoPass" text="Mostrar" />
-
-            <Label layoutX="80.0" layoutY="239.0" prefHeight="20.0" prefWidth="92.0" text="Contraseña">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </children>
-</VBox>
-
-
-        <!-- <?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 
         <?import javafx.geometry.Insets?>
         <?import javafx.scene.control.Button?>
@@ -130,4 +76,55 @@
            </children>
         </VBox> -->
 
+<VBox alignment="CENTER" prefHeight="488.0" prefWidth="641.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalproject.LoginViewController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <AnchorPane prefHeight="409.0" prefWidth="601.0">
+         <children>
+            <Label layoutX="80.0" layoutY="198.0" prefWidth="68.0" text="Usuario">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="190.0" layoutY="14.0" text="Marketplace Login" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="220.0" layoutY="369.0" text="¿Olvidaste tu contraseña?" textFill="#1f3bee" />
+            <TextField fx:id="txtUsuario" layoutX="190.0" layoutY="196.0" prefHeight="24.0" prefWidth="221.0" />
+            <Button fx:id="btnInicioSesion" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="309.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: #3359ff;" text="Iniciar Sesión" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Imagenes/UQ.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnRegistro" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="309.0" mnemonicParsing="false" onAction="#irFormulario" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: blue;" text="Registrarse" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
 
+            <!-- PasswordField para ocultar la contraseña -->
+            <PasswordField fx:id="passField" layoutX="190.0" layoutY="237.0" prefHeight="24.0" prefWidth="221.0" visible="true" />
+
+            <!-- TextField para mostrar la contraseña (inicialmente invisible) -->
+            <TextField fx:id="textField" layoutX="190.0" layoutY="237.0" prefHeight="24.0" prefWidth="221.0" visible="false" />
+
+            <ToggleButton fx:id="tglBtn" layoutX="411.0" layoutY="237.0" mnemonicParsing="false" onAction="#cambiarEstadoPass" text="Mostrar" />
+
+            <Label layoutX="80.0" layoutY="239.0" prefHeight="20.0" prefWidth="92.0" text="Contraseña">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
