@@ -5,8 +5,6 @@ import java.util.List;
 public class Muro {
     private List<Publicacion> publicaciones;
 
-
-
     public void agregarPublicacion(Publicacion publicacion){}
     public void eliminarPublicacion(int id){}
     public List<Publicacion> obtenerPublicacionesOrdenadas(){
