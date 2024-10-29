@@ -24,22 +24,24 @@ public class Main extends Application {
     }
     public static ArrayList<Object>lista=new ArrayList<>();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
+        Utilidades.cargarRutas();
 
         //launch();
-        Vendedor vendedor=new Vendedor("6","plo","t","fgg","de","uuuhg",null,null,null,12);
+        Vendedor vendedor=new Vendedor("3","plo","t","fgg","de","uuuhg",null,null,null,12);
 
 
-        /*Thread hilo2=new Thread(new HiloCarga("vendedor.xml"),"HiloCarga xml");
+        Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores),"HiloCarga xml");
         hilo2.start();
         hilo2.join();
         //System.out.println(lista.get(0).toString());
         lista.add(vendedor);
-        Thread hilo1=new Thread(new HiloSerializar("vendedor.xml",lista),"Hilo xml");
+        Thread hilo1=new Thread(new HiloSerializar(Utilidades.rutaVendedores,lista),"Hilo xml");
         hilo1.start();
-        hilo1.join();*/
+        hilo1.join();
+        System.out.println(Utilidades.rutaAOrigen);
 
-        Thread hiloCopia=new Thread(new HiloCopiaDeRespaldo("C:/Users/trejo/OneDrive/Documentos/ProgramacionTres/Git/ProyectoFinal_prog3_2024_2/FinalProject/ProyectoFinal/Persistencia/Archivo","C:/Users/trejo/OneDrive/Documentos/ProgramacionTres/Git/ProyectoFinal_prog3_2024_2/FinalProject/ProyectoFinal/Persistencia/Respaldo"));
+        Thread hiloCopia=new Thread(new HiloCopiaDeRespaldo(Utilidades.rutaAOrigen,Utilidades.rutaARespaldo));
         hiloCopia.start();
         hiloCopia.join();
 

@@ -1,5 +1,7 @@
 package Clases;
 
+import java.io.IOException;
+
 public class HiloCopiaDeRespaldo implements Runnable{
     private String rutaArchivoOriginal;
     private String rutaCarpetaRespaldo;
@@ -11,6 +13,10 @@ public class HiloCopiaDeRespaldo implements Runnable{
 
     @Override
     public void run() {
-        Utilidades.realizarCopiaSeguridad(rutaArchivoOriginal,rutaCarpetaRespaldo);
+        try {
+            Utilidades.realizarCopiaSeguridad(rutaArchivoOriginal,rutaCarpetaRespaldo);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
