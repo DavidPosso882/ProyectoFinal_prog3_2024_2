@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.4" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>t</string>
+    </void>
+    <void property="direccion">
+     <string>fgg</string>
+    </void>
+    <void property="id">
+     <string>6</string>
+    </void>
+    <void property="nombre">
+     <string>plo</string>
+    </void>
+    <void property="password">
+     <string>uuuhg</string>
+    </void>
+    <void property="reputacion">
+     <double>12.0</double>
+    </void>
+    <void property="username">
+     <string>de</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
