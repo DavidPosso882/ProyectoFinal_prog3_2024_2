@@ -96,8 +96,6 @@ public class VendedorCrud {
         }
     }
 
-    public static void agregarAlMuro(Vendedor vendedor) {}
-
     public static void mostrarAlerta(String tituloClave, String mensajeClave, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.showAndWait();
