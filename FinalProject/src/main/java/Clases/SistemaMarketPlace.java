@@ -5,8 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
+
+import static com.example.finalproject.Main.lista;
 
 public class SistemaMarketPlace {
     private static final Logger LOGGER = Logger.getLogger(SistemaMarketPlace.class.getName());
@@ -28,9 +32,15 @@ public class SistemaMarketPlace {
         return instance;
     }
 
-    public void registrarVendedor(Vendedor vendedor) throws ExcepcionesPersonalizadas.VendedorDuplicadoException, IOException {
-        PersistenciaXML p=new PersistenciaXML();
-        vendedorList= (List<Vendedor>) p.deserializarXml("datos.xml");
+    public void registrarVendedor(Vendedor vendedor) throws ExcepcionesPersonalizadas.VendedorDuplicadoException, IOException, InterruptedException {
+        Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores),"HiloCarga xml");
+        hilo2.start();
+        hilo2.join();
+        //System.out.println(lista.get(0).toString());
+        lista.add(vendedor);
+        Thread hilo1=new Thread(new HiloSerializar(Utilidades.rutaVendedores,lista),"Hilo xml");
+        hilo1.start();
+        hilo1.join();
 
         if (vendedorList.stream().anyMatch(v -> v.getId().equals(vendedor.getId()))) {
             throw new ExcepcionesPersonalizadas.VendedorDuplicadoException(vendedor.getId());
@@ -92,6 +102,50 @@ public class SistemaMarketPlace {
     public void setAdministradorList(List<Administrador> administradorList) {
         this.administradorList = administradorList;
     }
+
+   /*public static void configurarLogger(String rutaDirectorio,String mensaje, Throwable excepcion) {
+        try {
+            FileHandler fileHandler = new FileHandler(rutaDirectorio, true);
+            fileHandler.setLevel(Level.INFO); // Nivel de log para el archivo
+            fileHandler.setFormatter(new SimpleFormatter()); // Formato simple
+
+            // Asocia el FileHandler al LOGGER
+            LOGGER.addHandler(fileHandler);
+            LOGGER.setUseParentHandlers(false); // Evita que se loguee en la consola
+
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "No se pudo configurar el FileHandler en la ruta especificada.", e);
+        }
+       // Solo el nombre de la excepción
+        LOGGER.log(Level.INFO,mensaje,excepcion);
+    }*/
+
+    public static void configurarLogger(String rutaDirectorio, String mensaje, Throwable excepcion) {
+        try {
+            FileHandler fileHandler = new FileHandler(rutaDirectorio, true);
+            fileHandler.setLevel(Level.SEVERE); // Cambiado a SEVERE para excepciones
+            fileHandler.setFormatter(new SimpleFormatter());
+
+            LOGGER.addHandler(fileHandler);
+            LOGGER.setUseParentHandlers(false);
+
+            // Obtener el nombre completo de la excepción
+            String nombreExcepcion = excepcion.getClass().getName();
+
+            // Obtener el mensaje de la excepción
+            String mensajeExcepcion = excepcion.getMessage();
+
+            // Crear el mensaje en el formato deseado
+            String mensajeCompleto = String.format("%s: %s", nombreExcepcion, mensajeExcepcion);
+
+            // Registrar el mensaje sin el stack trace
+            LOGGER.log(Level.SEVERE, mensaje +" - " + mensajeCompleto);
+
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "No se pudo configurar el FileHandler en la ruta especificada: " + e.getMessage());
+        }
+    }
+
 
     public Persistencia getPersistencia() {
         return persistencia;

@@ -86,6 +86,7 @@ public class LoginViewController {
             }
         } catch (ExcepcionesPersonalizadas.AutenticacionFallidaException e) {
             mostrarAlerta("Error", "Autenticación fallida. Verifique sus credenciales.");
+            SistemaMarketPlace.configurarLogger(Utilidades.rutaLogVendedores,"no se pudo autenticar ",e);
         }
     }
 

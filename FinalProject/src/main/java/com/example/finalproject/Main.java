@@ -26,10 +26,8 @@ public class Main extends Application {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         Utilidades.cargarRutas();
-
-        //launch();
-        Vendedor vendedor=new Vendedor("3","plo","t","fgg","de","uuuhg",null,null,null,12);
-
+        launch();
+        /*Vendedor vendedor=new Vendedor("3","plo","t","fgg","de","uuuhg",null,null,null,12);
 
         Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores),"HiloCarga xml");
         hilo2.start();
@@ -39,7 +37,7 @@ public class Main extends Application {
         Thread hilo1=new Thread(new HiloSerializar(Utilidades.rutaVendedores,lista),"Hilo xml");
         hilo1.start();
         hilo1.join();
-        System.out.println(Utilidades.rutaAOrigen);
+        System.out.println(Utilidades.rutaAOrigen);*/
 
         Thread hiloCopia=new Thread(new HiloCopiaDeRespaldo(Utilidades.rutaAOrigen,Utilidades.rutaARespaldo));
         hiloCopia.start();

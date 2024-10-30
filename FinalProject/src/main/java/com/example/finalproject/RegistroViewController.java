@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
 
+import static com.example.finalproject.Main.lista;
+
 public class RegistroViewController {
     private static final Logger LOGGER = Logger.getLogger(RegistroViewController.class.getName());
 
@@ -106,8 +108,10 @@ public class RegistroViewController {
 
             try {
                 sistema.registrarVendedor(nuevoVendedor);
-                LOGGER.log(Level.INFO, "Nuevo vendedor registrado: " + nuevoVendedor.getNombre());
+                //LOGGER.log(Level.INFO, "Nuevo vendedor registrado: " + nuevoVendedor.getNombre());
+                //Clases.Logger.configurarLogger(Utilidades.rutaLogVendedores,"Vendedor registrado exitosamente - ",null);
                 mostrarAlerta("Éxito", "Registro exitoso del vendedor: " + nuevoVendedor.getNombre());
+
 
                 // Cerrar la ventana del formulario de registro
                 Stage stage = (Stage) btnFinalizar.getScene().getWindow();
@@ -116,7 +120,8 @@ public class RegistroViewController {
                 // Volver a la vista de login
                 volverLogin();
             } catch (ExcepcionesPersonalizadas.VendedorDuplicadoException e) {
-                LOGGER.log(Level.WARNING, "Intento de registro de vendedor duplicado");
+                //LOGGER.log(Level.WARNING, "Intento de registro de vendedor duplicado");
+                Clases.Logger.configurarLogger(Utilidades.rutaLogVendedores,"Intento de registro duplicado ",e);
                 mostrarAlerta("Error", "El vendedor ya existe en el sistema.");
             } catch (Exception e) {
                 LOGGER.log(Level.SEVERE, "Error al registrar el vendedor", e);

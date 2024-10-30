@@ -16,6 +16,7 @@ public class Utilidades {
     public static String rutavendedoresB;
     public static String rutaAOrigen;
     public static String rutaARespaldo;
+    public static String rutaLogVendedores;
 
 
     public static void realizarCopiaSeguridad(String rutaCarpetaOriginal, String rutaCarpetaRespaldo) throws IOException {
@@ -86,6 +87,8 @@ public class Utilidades {
             rutavendedoresB = propiedades.getProperty("ruta.vendedoresB");
             rutaAOrigen = propiedades.getProperty("ruta.archivoOriginal");
             rutaARespaldo = propiedades.getProperty("ruta.archivoRespaldo");
+            rutaLogVendedores= propiedades.getProperty("ruta.logVendedores");
+
 
             input.close(); // Cerrar el InputStream después de cargar las propiedades
 

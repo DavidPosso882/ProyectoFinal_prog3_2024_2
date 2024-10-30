@@ -266,40 +266,5 @@
     </void>
    </object>
   </void>
-  <void method="add">
-   <object class="Clases.Vendedor">
-    <void property="apellido">
-     <string>cev</string>
-    </void>
-    <void property="contactos">
-     <object class="java.util.ArrayList"/>
-    </void>
-    <void property="direccion">
-     <string>rvfd</string>
-    </void>
-    <void property="id">
-     <string>1456</string>
-    </void>
-    <void property="muro">
-     <object class="Clases.Muro">
-      <void property="publicaciones">
-       <object class="java.util.ArrayList"/>
-      </void>
-     </object>
-    </void>
-    <void property="nombre">
-     <string>ec</string>
-    </void>
-    <void property="password">
-     <string>fv</string>
-    </void>
-    <void property="productos">
-     <object class="java.util.ArrayList"/>
-    </void>
-    <void property="username">
-     <string>df</string>
-    </void>
-   </object>
-  </void>
  </object>
 </java>
