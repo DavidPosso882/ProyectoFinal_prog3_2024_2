@@ -84,7 +84,7 @@ public class Utilidades {
 
             // Cargar propiedades
             rutaVendedores = propiedades.getProperty("ruta.vendedores");
-            rutavendedoresB = propiedades.getProperty("ruta.vendedoresB");
+            rutavendedoresB = propiedades.getProperty("ruta.vendedoresBinario");
             rutaAOrigen = propiedades.getProperty("ruta.archivoOriginal");
             rutaARespaldo = propiedades.getProperty("ruta.archivoRespaldo");
             rutaLogVendedores= propiedades.getProperty("ruta.logVendedores");

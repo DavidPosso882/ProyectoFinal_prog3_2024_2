@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-
+    public static ArrayList<Object>lista=new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -22,11 +22,18 @@ public class Main extends Application {
         stage.show();
 
     }
-    public static ArrayList<Object>lista=new ArrayList<>();
+
 
     public static void main(String[] args) throws InterruptedException, IOException {
         Utilidades.cargarRutas();
+        Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores, lista),"HiloCarga xml");
+        hilo2.start();
+        hilo2.join();
+        System.out.println(lista);
+
+        //Utilidades.cargarRutas();
         launch();
+
         /*Vendedor vendedor=new Vendedor("3","plo","t","fgg","de","uuuhg",null,null,null,12);
 
         Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores),"HiloCarga xml");

@@ -13,12 +13,12 @@ public class HiloSerializar implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("proceso iniciado");
+        System.out.println("proceso iniciado serializar .xml");
         try {
             Utilidades.serializarXml(ruta,lista);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("proceso terminado");
+        System.out.println("proceso terminado guardado en .xml");
     }
 }

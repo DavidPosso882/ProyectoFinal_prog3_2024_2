@@ -1,5 +1,7 @@
 package Clases;
 
+import com.example.finalproject.Main;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +35,22 @@ public class SistemaMarketPlace {
     }
 
     public void registrarVendedor(Vendedor vendedor) throws ExcepcionesPersonalizadas.VendedorDuplicadoException, IOException, InterruptedException {
-        Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores),"HiloCarga xml");
-        hilo2.start();
-        hilo2.join();
+        //Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores, lista),"HiloCarga xml");
+       // hilo2.start();
+        //hilo2.join();
         //System.out.println(lista.get(0).toString());
         lista.add(vendedor);
         Thread hilo1=new Thread(new HiloSerializar(Utilidades.rutaVendedores,lista),"Hilo xml");
         hilo1.start();
         hilo1.join();
+        Thread hilo3=new Thread(new HiloSerializarBinario(Utilidades.rutavendedoresB,lista),"Hilo persistencia .dat");
+        hilo3.start();
+        hilo3.join();
+        Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores, lista),"HiloCarga xml");
+         hilo2.start();
+        hilo2.join();
+        System.out.println(lista);
+        //ArrayList<Vendedor>listaV=(ArrayList<Vendedor>) lista;
 
         if (vendedorList.stream().anyMatch(v -> v.getId().equals(vendedor.getId()))) {
             throw new ExcepcionesPersonalizadas.VendedorDuplicadoException(vendedor.getId());

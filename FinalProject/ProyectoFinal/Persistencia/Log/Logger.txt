@@ -2,3 +2,5 @@ oct 29, 2024 9:34:37 P. M. Clases.Logger configurarLogger
 GRAVE: Intento de registro duplicado  - Clases.ExcepcionesPersonalizadas$VendedorDuplicadoException: Ya existe un vendedor con el ID: 1456
 oct 29, 2024 10:09:30 P. M. Clases.SistemaMarketPlace configurarLogger
 GRAVE: no se pudo autenticar  - Clases.ExcepcionesPersonalizadas$AutenticacionFallidaException: La autenticación ha fallado. Por favor, verifique sus credenciales.
+oct 30, 2024 8:08:29 P. M. Clases.Logger configurarLogger
+GRAVE: Intento de registro duplicado  - VendedorDuplicadoException: Ya existe un vendedor con el ID: 123

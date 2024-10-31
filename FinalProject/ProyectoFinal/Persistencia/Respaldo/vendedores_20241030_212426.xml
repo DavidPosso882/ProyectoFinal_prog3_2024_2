@@ -4,141 +4,86 @@
   <void method="add">
    <object class="Clases.Vendedor">
     <void property="apellido">
-     <string>t</string>
-    </void>
-    <void property="direccion">
-     <string>fgg</string>
-    </void>
-    <void property="id">
-     <string>6</string>
-    </void>
-    <void property="nombre">
-     <string>plo</string>
-    </void>
-    <void property="password">
-     <string>uuuhg</string>
-    </void>
-    <void property="reputacion">
-     <double>12.0</double>
-    </void>
-    <void property="username">
-     <string>de</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Clases.Vendedor">
-    <void property="apellido">
-     <string>t</string>
-    </void>
-    <void property="direccion">
-     <string>fgg</string>
-    </void>
-    <void property="id">
-     <string>3</string>
-    </void>
-    <void property="nombre">
-     <string>plo</string>
-    </void>
-    <void property="password">
-     <string>uuuhg</string>
-    </void>
-    <void property="reputacion">
-     <double>12.0</double>
-    </void>
-    <void property="username">
-     <string>de</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Clases.Vendedor">
-    <void property="apellido">
-     <string>t</string>
-    </void>
-    <void property="direccion">
-     <string>fgg</string>
-    </void>
-    <void property="id">
-     <string>3</string>
-    </void>
-    <void property="nombre">
-     <string>plo</string>
-    </void>
-    <void property="password">
-     <string>uuuhg</string>
-    </void>
-    <void property="reputacion">
-     <double>12.0</double>
-    </void>
-    <void property="username">
-     <string>de</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Clases.Vendedor">
-    <void property="apellido">
-     <string>t</string>
-    </void>
-    <void property="direccion">
-     <string>fgg</string>
-    </void>
-    <void property="id">
-     <string>3</string>
-    </void>
-    <void property="nombre">
-     <string>plo</string>
-    </void>
-    <void property="password">
-     <string>uuuhg</string>
-    </void>
-    <void property="reputacion">
-     <double>12.0</double>
-    </void>
-    <void property="username">
-     <string>de</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Clases.Vendedor">
-    <void property="apellido">
-     <string>t</string>
-    </void>
-    <void property="direccion">
-     <string>fgg</string>
-    </void>
-    <void property="id">
-     <string>3</string>
-    </void>
-    <void property="nombre">
-     <string>plo</string>
-    </void>
-    <void property="password">
-     <string>uuuhg</string>
-    </void>
-    <void property="reputacion">
-     <double>12.0</double>
-    </void>
-    <void property="username">
-     <string>de</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Clases.Vendedor">
-    <void property="apellido">
-     <string>trejos</string>
+     <string>fbfgtb</string>
     </void>
     <void property="contactos">
      <object class="java.util.ArrayList"/>
     </void>
     <void property="direccion">
-     <string>scsdc</string>
+     <string>tbhgfn</string>
     </void>
     <void property="id">
-     <string>00123</string>
+     <string>6788</string>
+    </void>
+    <void property="muro">
+     <object class="Clases.Muro">
+      <void property="publicaciones">
+       <object class="java.util.ArrayList"/>
+      </void>
+     </object>
+    </void>
+    <void property="nombre">
+     <string>rtbtf</string>
+    </void>
+    <void property="password">
+     <string>gnghmhj</string>
+    </void>
+    <void property="productos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="username">
+     <string>gbnghn</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>bgn</string>
+    </void>
+    <void property="contactos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="direccion">
+     <string>thytj</string>
+    </void>
+    <void property="id">
+     <string>56789</string>
+    </void>
+    <void property="muro">
+     <object class="Clases.Muro">
+      <void property="publicaciones">
+       <object class="java.util.ArrayList"/>
+      </void>
+     </object>
+    </void>
+    <void property="nombre">
+     <string>fdvfb</string>
+    </void>
+    <void property="password">
+     <string>yjhyuj</string>
+    </void>
+    <void property="productos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="username">
+     <string>tyhtyj</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>Trejos</string>
+    </void>
+    <void property="contactos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="direccion">
+     <string>cv</string>
+    </void>
+    <void property="id">
+     <string>1234567</string>
     </void>
     <void property="muro">
      <object class="Clases.Muro">
@@ -151,48 +96,13 @@
      <string>daniela</string>
     </void>
     <void property="password">
-     <string>miAmorcitoLindo</string>
+     <string>thtyh</string>
     </void>
     <void property="productos">
      <object class="java.util.ArrayList"/>
     </void>
     <void property="username">
-     <string>daniii</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Clases.Vendedor">
-    <void property="apellido">
-     <string>thngyn</string>
-    </void>
-    <void property="contactos">
-     <object class="java.util.ArrayList"/>
-    </void>
-    <void property="direccion">
-     <string>ynjhm</string>
-    </void>
-    <void property="id">
-     <string>456</string>
-    </void>
-    <void property="muro">
-     <object class="Clases.Muro">
-      <void property="publicaciones">
-       <object class="java.util.ArrayList"/>
-      </void>
-     </object>
-    </void>
-    <void property="nombre">
-     <string>gth</string>
-    </void>
-    <void property="password">
-     <string>mghm</string>
-    </void>
-    <void property="productos">
-     <object class="java.util.ArrayList"/>
-    </void>
-    <void property="username">
-     <string>hngvv</string>
+     <string>rgg</string>
     </void>
    </object>
   </void>
@@ -205,10 +115,10 @@
      <object class="java.util.ArrayList"/>
     </void>
     <void property="direccion">
-     <string>xnjlknkl</string>
+     <string>jdxjkej</string>
     </void>
     <void property="id">
-     <string>80789</string>
+     <string>89976</string>
     </void>
     <void property="muro">
      <object class="Clases.Muro">
@@ -234,16 +144,16 @@
   <void method="add">
    <object class="Clases.Vendedor">
     <void property="apellido">
-     <string>kjnjnihi</string>
+     <string>fjuhk</string>
     </void>
     <void property="contactos">
      <object class="java.util.ArrayList"/>
     </void>
     <void property="direccion">
-     <string>njhbhbhb</string>
+     <string>uliñ</string>
     </void>
     <void property="id">
-     <string>6788</string>
+     <string>12234</string>
     </void>
     <void property="muro">
      <object class="Clases.Muro">
@@ -253,16 +163,191 @@
      </object>
     </void>
     <void property="nombre">
-     <string>ijjihiu</string>
+     <string>cdsdgth</string>
     </void>
     <void property="password">
-     <string>hjbjbb</string>
+     <string>rgth</string>
     </void>
     <void property="productos">
      <object class="java.util.ArrayList"/>
     </void>
     <void property="username">
-     <string>jnjibib</string>
+     <string>wsdcsf</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>ospina</string>
+    </void>
+    <void property="contactos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="direccion">
+     <string>kxlml</string>
+    </void>
+    <void property="id">
+     <string>123</string>
+    </void>
+    <void property="muro">
+     <object class="Clases.Muro">
+      <void property="publicaciones">
+       <object class="java.util.ArrayList"/>
+      </void>
+     </object>
+    </void>
+    <void property="nombre">
+     <string>camilo</string>
+    </void>
+    <void property="password">
+     <string>zharick</string>
+    </void>
+    <void property="productos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="username">
+     <string>camilo</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>slklkk</string>
+    </void>
+    <void property="contactos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="direccion">
+     <string>slkcmlml</string>
+    </void>
+    <void property="id">
+     <string>123</string>
+    </void>
+    <void property="muro">
+     <object class="Clases.Muro">
+      <void property="publicaciones">
+       <object class="java.util.ArrayList"/>
+      </void>
+     </object>
+    </void>
+    <void property="nombre">
+     <string>ksxlxlm</string>
+    </void>
+    <void property="password">
+     <string>slkclkj</string>
+    </void>
+    <void property="productos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="username">
+     <string>slkmlm</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>trejos</string>
+    </void>
+    <void property="contactos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="direccion">
+     <string>ckjnjkndckjn</string>
+    </void>
+    <void property="id">
+     <string>678</string>
+    </void>
+    <void property="muro">
+     <object class="Clases.Muro">
+      <void property="publicaciones">
+       <object class="java.util.ArrayList"/>
+      </void>
+     </object>
+    </void>
+    <void property="nombre">
+     <string>Dany</string>
+    </void>
+    <void property="password">
+     <string>mi amorcito</string>
+    </void>
+    <void property="productos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="username">
+     <string>daniela</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>arboleda</string>
+    </void>
+    <void property="contactos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="direccion">
+     <string>890hb</string>
+    </void>
+    <void property="id">
+     <string>12345</string>
+    </void>
+    <void property="muro">
+     <object class="Clases.Muro">
+      <void property="publicaciones">
+       <object class="java.util.ArrayList"/>
+      </void>
+     </object>
+    </void>
+    <void property="nombre">
+     <string>daniela</string>
+    </void>
+    <void property="password">
+     <string>8076</string>
+    </void>
+    <void property="productos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="username">
+     <string>daniii</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>arboleda</string>
+    </void>
+    <void property="contactos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="direccion">
+     <string>cll 3</string>
+    </void>
+    <void property="id">
+     <string>67890</string>
+    </void>
+    <void property="muro">
+     <object class="Clases.Muro">
+      <void property="publicaciones">
+       <object class="java.util.ArrayList"/>
+      </void>
+     </object>
+    </void>
+    <void property="nombre">
+     <string>daniela</string>
+    </void>
+    <void property="password">
+     <string>1234</string>
+    </void>
+    <void property="productos">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="username">
+     <string>dani</string>
     </void>
    </object>
   </void>
