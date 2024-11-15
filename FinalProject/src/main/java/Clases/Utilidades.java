@@ -7,6 +7,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Properties;
 
 
@@ -118,10 +119,24 @@ public class Utilidades {
         codificador.close();
     }
 
-    public static Object deserializarXml(String nombre) throws IOException {
+    /*public static Object deserializarXml(String nombre) throws IOException {
         XMLDecoder decodificador = new XMLDecoder(new FileInputStream(nombre));
         Object objeto = decodificador.readObject();
         decodificador.close();
         return objeto;
+    }*/
+
+    public static <T> ArrayList<T> deserializarXml(String nombre) throws IOException {
+        ArrayList<T> lista = new ArrayList<>();
+
+        try (XMLDecoder decodificador = new XMLDecoder(new FileInputStream(nombre))) {
+            lista = (ArrayList<T>) decodificador.readObject();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error en la estructura del archivo XML: " + e.getMessage());
+        }
+
+        return lista;
     }
+
+
 }

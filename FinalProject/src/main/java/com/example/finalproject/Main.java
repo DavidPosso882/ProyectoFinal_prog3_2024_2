@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class Main extends Application {
 
-    public static ArrayList<Object>lista=new ArrayList<>();
+    public static ArrayList<Vendedor>listaVendedores=new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -26,29 +28,27 @@ public class Main extends Application {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         Utilidades.cargarRutas();
-        Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores, lista),"HiloCarga xml");
-        hilo2.start();
-        hilo2.join();
-        System.out.println(lista);
-
-        //Utilidades.cargarRutas();
-        launch();
-
-        /*Vendedor vendedor=new Vendedor("3","plo","t","fgg","de","uuuhg",null,null,null,12);
-
-        Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores),"HiloCarga xml");
-        hilo2.start();
-        hilo2.join();
-        //System.out.println(lista.get(0).toString());
-        lista.add(vendedor);
-        Thread hilo1=new Thread(new HiloSerializar(Utilidades.rutaVendedores,lista),"Hilo xml");
-        hilo1.start();
-        hilo1.join();
-        System.out.println(Utilidades.rutaAOrigen);*/
-
+        MetodosCrud.actualizarDatos(listaVendedores,Utilidades.rutaVendedores);
         Thread hiloCopia=new Thread(new HiloCopiaDeRespaldo(Utilidades.rutaAOrigen,Utilidades.rutaARespaldo));
         hiloCopia.start();
         hiloCopia.join();
+
+        //Implementación de sockets
+
+        try (ServerSocket servidorSocket = new ServerSocket(5000)) {
+            System.out.println("Servidor en funcionamiento, esperando conexiones...");
+
+            while (true) {
+                Socket clienteSocket = servidorSocket.accept();
+                System.out.println("Cliente conectado");
+
+                // Crear un nuevo hilo para manejar cada cliente
+                ManejadorCliente manejador = new ManejadorCliente(clienteSocket);
+                new Thread(manejador).start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }

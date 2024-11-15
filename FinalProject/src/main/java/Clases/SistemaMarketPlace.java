@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
 
-import static com.example.finalproject.Main.lista;
+
 
 public class SistemaMarketPlace {
     private static final Logger LOGGER = Logger.getLogger(SistemaMarketPlace.class.getName());
@@ -34,7 +34,7 @@ public class SistemaMarketPlace {
         return instance;
     }
 
-    public void registrarVendedor(Vendedor vendedor) throws ExcepcionesPersonalizadas.VendedorDuplicadoException, IOException, InterruptedException {
+   /* public void registrarVendedor(Vendedor vendedor) throws ExcepcionesPersonalizadas.VendedorDuplicadoException, IOException, InterruptedException {
         //Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores, lista),"HiloCarga xml");
        // hilo2.start();
         //hilo2.join();
@@ -43,7 +43,7 @@ public class SistemaMarketPlace {
         Thread hilo1=new Thread(new HiloSerializar(Utilidades.rutaVendedores,lista),"Hilo xml");
         hilo1.start();
         hilo1.join();
-        Thread hilo3=new Thread(new HiloSerializarBinario(Utilidades.rutavendedoresB,lista),"Hilo persistencia .dat");
+        /*Thread hilo3=new Thread(new HiloSerializarBinario(Utilidades.rutavendedoresB,lista),"Hilo persistencia .dat");
         hilo3.start();
         hilo3.join();
         Thread hilo2=new Thread(new HiloCarga(Utilidades.rutaVendedores, lista),"HiloCarga xml");
