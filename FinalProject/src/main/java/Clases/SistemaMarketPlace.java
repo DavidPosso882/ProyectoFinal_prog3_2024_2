@@ -3,10 +3,8 @@ package Clases;
 import com.example.finalproject.Main;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -27,7 +25,7 @@ public class SistemaMarketPlace {
         this.persistencia = persistencia;
     }
 
-    public static synchronized SistemaMarketPlace getInstance() {
+   /* public static synchronized SistemaMarketPlace getInstance() {
         if (instance == null) {
             instance = new SistemaMarketPlace(new ArrayList<>(), new ArrayList<>(), new PersistenciaXML());
         }
@@ -155,6 +153,36 @@ public class SistemaMarketPlace {
             LOGGER.log(Level.SEVERE, "No se pudo configurar el FileHandler en la ruta especificada: " + e.getMessage());
         }
     }
+
+    //Funciones
+
+    // Función para autenticar un vendedor
+    public boolean autenticarVendedor(String username, String password) {
+        for (Vendedor vendedor : Main.listaVendedores) {
+            if (vendedor.getUsername().equals(username) && vendedor.getPassword().equals(password)) {
+                System.out.println("Vendedor autenticado correctamente.");
+                return true;
+            }
+        }
+        System.out.println("Error de autenticación. Usuario o contraseña incorrectos.");
+        return false;
+    }
+
+    public static String crearComentario(String contenido, Vendedor autor,Publicacion publicacion) {
+        // Generar un ID único para el comentario
+        String id = UUID.randomUUID().toString();
+
+        // Obtener la fecha y hora actual
+        LocalDateTime fechaActual = LocalDateTime.now();
+
+        // Crear y retornar el nuevo comentario
+        Comentario nuevoComentario = new Comentario(id, contenido, fechaActual, autor);
+
+        System.out.println("Nuevo comentario creado por " + autor.getNombre() + ": " + contenido);
+        publicacion.agregarComentarios(nuevoComentario);
+        return "Nuevo comentario creado por " + autor.getNombre() + ": " + contenido;
+    }
+
 
 
     public Persistencia getPersistencia() {

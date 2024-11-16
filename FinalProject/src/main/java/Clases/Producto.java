@@ -1,12 +1,17 @@
 package Clases;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Producto implements Serializable {
     private String id;
     private String nombre;
+    private byte[] imagenVista;
     private String imagen;
     private Categoria categoria;
     private double precio;
@@ -15,6 +20,10 @@ public class Producto implements Serializable {
     private Vendedor vendedor;
     private List<Comentario> comentarios;
     private List<MeGusta> meGusta;
+
+    public static byte[] cargarImagenDesdeArchivo(String rutaArchivo) throws IOException, IOException {
+        return Files.readAllBytes(Paths.get(rutaArchivo));
+    }
 
     public void agregarComentario(Comentario comentario) {
         comentarios.add(comentario);
@@ -28,7 +37,7 @@ public class Producto implements Serializable {
         this.estado = estado;
     }
 
-    public Producto(String id, String nombre, String imagen, Categoria categoria, double precio, EstadoProducto estado, LocalDateTime fechaPublicacion, Vendedor vendedor, List<Comentario> comentarios, List<MeGusta> meGusta) {
+    public Producto(String id, String nombre, String imagen, Categoria categoria, double precio, EstadoProducto estado, LocalDateTime fechaPublicacion, Vendedor vendedor) throws IOException {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -37,8 +46,9 @@ public class Producto implements Serializable {
         this.estado = estado;
         this.fechaPublicacion = fechaPublicacion;
         this.vendedor = vendedor;
-        this.comentarios = comentarios;
-        this.meGusta = meGusta;
+        this.comentarios = new ArrayList<>();
+        this.meGusta = new ArrayList<>();
+        this.imagenVista=cargarImagenDesdeArchivo(imagen);
     }
 
     public String getId() {
@@ -119,5 +129,13 @@ public class Producto implements Serializable {
 
     public void setMeGusta(List<MeGusta> meGusta) {
         this.meGusta = meGusta;
+    }
+
+    public byte[] getImagenVista() {
+        return imagenVista;
+    }
+
+    public void setImagenVista(byte[] imagenVista) {
+        this.imagenVista = imagenVista;
     }
 }

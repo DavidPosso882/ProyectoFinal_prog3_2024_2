@@ -401,5 +401,27 @@
     </void>
    </object>
   </void>
+  <void method="add">
+   <object class="Clases.Vendedor">
+    <void property="apellido">
+     <string>Apellido Vendedor</string>
+    </void>
+    <void property="direccion">
+     <string>Direccion Vendedor</string>
+    </void>
+    <void property="id">
+     <string>12112024</string>
+    </void>
+    <void property="nombre">
+     <string>Nombre Vendedor</string>
+    </void>
+    <void property="password">
+     <string>Password Vendedor</string>
+    </void>
+    <void property="username">
+     <string>Username Vendedor</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>

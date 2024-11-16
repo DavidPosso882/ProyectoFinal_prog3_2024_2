@@ -16,17 +16,6 @@ public class Vendedor extends Usuario implements Serializable {
         productos.add(producto);
     }
 
-    // Update
-    public boolean actualizarProducto(String id, Producto productoActualizado) {
-        for (int i = 0; i < productos.size(); i++) {
-            if (productos.get(i).getId().equals(id)) {
-                productos.set(i, productoActualizado);
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void eliminarProducto(String id) {
         productos.removeIf(p -> p.getId().equals(id));
     }

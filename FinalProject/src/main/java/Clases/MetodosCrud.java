@@ -13,6 +13,7 @@ public class MetodosCrud {
             return true;
         }
         else{
+            System.out.println("El vendedor ya existe");
             return false;
         }
 
