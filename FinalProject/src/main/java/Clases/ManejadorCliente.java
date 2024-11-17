@@ -1,34 +1,45 @@
 package Clases;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ManejadorCliente implements Runnable {
     private Socket clienteSocket;
+    private static List<ManejadorCliente> clientes = new ArrayList<>();
+    private ObjectOutputStream salida;
+    private ObjectInputStream entrada;
+    private String nombreUsuario;
 
     public ManejadorCliente(Socket clienteSocket) {
         this.clienteSocket = clienteSocket;
+        synchronized (clientes) {
+            clientes.add(this);
+        }
     }
 
     @Override
     public void run() {
-        try (
-                ObjectOutputStream salida = new ObjectOutputStream(clienteSocket.getOutputStream());
-                ObjectInputStream entrada = new ObjectInputStream(clienteSocket.getInputStream())
-        ) {
+        try {
+            // Crear streams de entrada y salida
+            salida = new ObjectOutputStream(clienteSocket.getOutputStream());
+            entrada = new ObjectInputStream(clienteSocket.getInputStream());
+
             while (!clienteSocket.isClosed()) {
                 try {
-                    // Recibir primero tipo de entidad y luego operación
-                    String tipoEntidad = (String) entrada.readObject();
-                    String operacion = (String) entrada.readObject();
+                    // Leer el tipo de mensaje desde el cliente
+                    String tipoMensaje = (String) entrada.readObject();
+                    System.out.println("Tipo de mensaje recibido: " + tipoMensaje);
 
-                    if ("Vendedor".equals(tipoEntidad)) {
+                    if ("CHAT".equals(tipoMensaje)) {
+                        manejarChat(entrada);
+                    } else if ("Vendedor".equals(tipoMensaje)) {
+                        String operacion = (String) entrada.readObject();
                         manejarVendedor(operacion, entrada, salida);
-                    } else if ("Producto".equals(tipoEntidad)) {
-                        // manejarProducto(operacion, entrada, salida);
+                    } else if ("Producto".equals(tipoMensaje)) {
+                        // Lógica futura para manejar productos
+                        System.out.println("Operación de producto no implementada.");
                     }
                 } catch (EOFException e) {
                     // Cliente cerró la conexión
@@ -42,10 +53,32 @@ public class ManejadorCliente implements Runnable {
         } catch (IOException e) {
             System.err.println("Error en la conexión: " + e.getMessage());
         } finally {
+            // Limpiar recursos y notificar a los demás clientes
+            synchronized (clientes) {
+                clientes.remove(this);
+            }
+            if (nombreUsuario != null) {
+                broadcastMensaje(nombreUsuario + " ha salido del chat.");
+            }
             try {
                 clienteSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private void manejarChat(ObjectInputStream entrada) throws IOException, ClassNotFoundException {
+        String operacionChat = (String) entrada.readObject();
+        if ("LOGIN".equals(operacionChat)) {
+            nombreUsuario = (String) entrada.readObject();
+            System.out.println("Nuevo usuario conectado: " + nombreUsuario);
+            broadcastMensaje(nombreUsuario + " se ha unido al chat.");
+        } else if ("MESSAGE".equals(operacionChat)) {
+            String mensaje = (String) entrada.readObject();
+            if (mensaje != null) {
+                System.out.println("Mensaje de chat recibido: " + mensaje);
+                broadcastMensaje(nombreUsuario + ": " + mensaje);
             }
         }
     }
@@ -78,11 +111,31 @@ public class ManejadorCliente implements Runnable {
                     salida.writeBoolean(eliminado);
                     salida.flush();
                     break;
+                default:
+                    System.out.println("Operación de vendedor desconocida: " + operacion);
+                    salida.writeObject(false); // Respuesta de error
+                    salida.flush();
+                    break;
             }
         } catch (Exception e) {
             System.err.println("Error manejando operación de vendedor: " + e.getMessage());
-            salida.writeObject(false); // Enviar respuesta de error al cliente
+            salida.writeObject(false); // Respuesta de error
             salida.flush();
+        }
+    }
+
+    private void broadcastMensaje(String mensaje) {
+        synchronized (clientes) {
+            for (ManejadorCliente cliente : clientes) {
+                if (cliente != this) {
+                    try {
+                        cliente.salida.writeObject(mensaje);
+                        cliente.salida.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 }

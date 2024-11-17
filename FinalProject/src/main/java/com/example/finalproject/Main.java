@@ -54,7 +54,7 @@ public class Main extends Application {
 
         //Implementación de sockets No tocar
 
-        /*try (ServerSocket servidorSocket = new ServerSocket(5000)) {
+        try (ServerSocket servidorSocket = new ServerSocket(5000)) {
             System.out.println("Servidor en funcionamiento, esperando conexiones...");
 
             while (true) {
@@ -67,7 +67,7 @@ public class Main extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
     }
