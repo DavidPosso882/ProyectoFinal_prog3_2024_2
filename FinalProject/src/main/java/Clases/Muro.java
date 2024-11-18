@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 public class Muro implements Serializable {
     private List<Publicacion> publicaciones;
 
+
+
     public void agregarPublicacion(Publicacion publicacion) {
         publicaciones.add(publicacion);
     }
@@ -23,6 +25,8 @@ public class Muro implements Serializable {
         if (publicaciones == null) {
             return new ArrayList<>();
         }
+
+
 
         List<Publicacion> publicacionesOrdenadas = new ArrayList<>(publicaciones);
 
@@ -50,6 +54,8 @@ public class Muro implements Serializable {
 
     public Muro() {
     }
+
+
 
     public List<Publicacion> getPublicaciones() {
         return publicaciones;

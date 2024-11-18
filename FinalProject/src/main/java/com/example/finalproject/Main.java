@@ -36,15 +36,32 @@ public class Main extends Application {
         hiloCopia.join();
         //No tocar
 
+
+
+
+
         //Datos de prueba
-        Vendedor v2=new Vendedor("Vendedor2","Vendedor2","Vendedor2","Vendedor2","Vendedor2","Vendedor2",new ArrayList<>(),new ArrayList<>(),new Muro(),0);
+        /*
+        ArrayList<Vendedor>contactos=new ArrayList<>();
+        Vendedor vendedor=MetodosCrud.obtenerVendedor("0000");
+        Vendedor vendedor1=new Vendedor("Vendedor1","Vendedor1","Vendedor1","Vendedor1","Vendedor1","Vendedor1",new ArrayList<>(),new ArrayList<>(),new Muro(),0);
+        contactos.add(vendedor);
+        vendedor1.setContactos(contactos);
+        MetodosCrud.actualizarVendedor(vendedor1);
+
+
+        Vendedor vendedor=new Vendedor("0000","Daniela","Trejos","Direccion","dany","1234",new ArrayList<>(),contactos,new Muro(),0);
+
         Publicacion publicacion=new Publicacion("1","Publicacion","2023/06/02",new Vendedor("Vendedor1","Vendedor1","Vendedor1","Vendedor1","Vendedor1","Vendedor1",new ArrayList<>(),new ArrayList<>(),new Muro(),0));
-        SistemaMarketPlace.crearComentario("me gusto lo recomiendo",v2,publicacion);
-        System.out.println(publicacion.getComentarios());
-        publicacion.agregarMegusta(new MeGusta(LocalDateTime.now(),v2));
-        System.out.println(publicacion.getMeGusta().size());
-        Producto producto=new Producto("1","Producto","C:/Users/trejo/OneDrive/Imágenes/4.jpg",Categoria.HOGAR,1.0,EstadoProducto.PUBLICADO, LocalDateTime.now(),v2);
-        System.out.println(producto.getImagenVista());
+        //SistemaMarketPlace.crearComentario("me gusto lo recomiendo",v2,publicacion);
+        //System.out.println(publicacion.getComentarios());
+        publicacion.agregarMegusta(new MeGusta(LocalDateTime.now(),vendedor));
+        //System.out.println(publicacion.getMeGusta().size());
+        Producto producto=new Producto("1","Producto","C:/Users/trejo/OneDrive/Imágenes/4.jpg",Categoria.HOGAR,1.0,EstadoProducto.PUBLICADO, LocalDateTime.now(),vendedor);
+        listaVendedores.add(vendedor);
+        listaVendedores.add(vendedor1);
+        Utilidades.serializarXml(Utilidades.rutaVendedores,listaVendedores);
+        //System.out.println(producto.getImagenVista());
 
         /*Vendedor v1=new Vendedor("Vendedor1","Vendedor1","Vendedor1","Vendedor1","Vendedor1","Vendedor1",new ArrayList<>(),new ArrayList<>(),new Muro(),0);
 
@@ -52,17 +69,14 @@ public class Main extends Application {
         v2.getSolicitudesPendientes().get(0);
         System.out.println(v2.getSolicitudesPendientes().get(0));*/
 
-        //Implementación de sockets No tocar
-
-        try (ServerSocket servidorSocket = new ServerSocket(5000)) {
-            System.out.println("Servidor en funcionamiento, esperando conexiones...");
+        try (ServerSocket serverSocket = new ServerSocket(5000)) {
+            System.out.println("Servidor iniciado en el puerto 5000");
 
             while (true) {
-                Socket clienteSocket = servidorSocket.accept();
-                System.out.println("Cliente conectado");
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Nuevo cliente conectado");
 
-                // Crear un nuevo hilo para manejar cada cliente
-                ManejadorCliente manejador = new ManejadorCliente(clienteSocket);
+                ManejadorCliente manejador = new ManejadorCliente(clientSocket);
                 new Thread(manejador).start();
             }
         } catch (IOException e) {

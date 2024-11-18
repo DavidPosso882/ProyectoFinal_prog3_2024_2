@@ -70,7 +70,7 @@ public class Vendedor extends Usuario implements Serializable {
         super(id, nombre, apellido, direccion, username, password);
         this.productos = productos;
         this.contactos = contactos;
-        this.muro = muro;
+        this.muro = new Muro(new ArrayList<>());
         this.reputacion = reputacion;
         this.solicitudesPendientes = new ArrayList<>();
     }

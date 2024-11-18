@@ -13,7 +13,7 @@ import java.util.logging.SimpleFormatter;
 
 
 public class SistemaMarketPlace {
-    private static final Logger LOGGER = Logger.getLogger(SistemaMarketPlace.class.getName());
+    static final Logger LOGGER = Logger.getLogger(SistemaMarketPlace.class.getName());
     private static SistemaMarketPlace instance;
     private List<Vendedor> vendedorList;
     private List<Administrador> administradorList;
@@ -157,15 +157,16 @@ public class SistemaMarketPlace {
     //Funciones
 
     // Función para autenticar un vendedor
-    public boolean autenticarVendedor(String username, String password) {
+
+    public static Vendedor autenticarVendedor(String username, String password) {
         for (Vendedor vendedor : Main.listaVendedores) {
             if (vendedor.getUsername().equals(username) && vendedor.getPassword().equals(password)) {
-                System.out.println("Vendedor autenticado correctamente.");
-                return true;
+                LOGGER.info("Vendedor autenticado correctamente: " + username);
+                return vendedor;
             }
         }
-        System.out.println("Error de autenticación. Usuario o contraseña incorrectos.");
-        return false;
+        LOGGER.warning("Error de autenticación para el usuario: " + username);
+        return null;
     }
 
     public static String crearComentario(String contenido, Vendedor autor,Publicacion publicacion) {
