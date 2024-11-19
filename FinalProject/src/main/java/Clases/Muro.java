@@ -49,7 +49,8 @@ public class Muro implements Serializable {
     }
 
     public Muro(List<Publicacion> publicaciones) {
-        this.publicaciones = publicaciones;
+
+        this.publicaciones = new ArrayList<>();
     }
 
     public Muro() {

@@ -43,12 +43,33 @@ public class ManejadorCliente implements Runnable {
                     case "CERRAR_CHAT":
                         cerrarConexion();
                         return;
+                    case "CREAR_VENDEDOR":
+                        manejarCrearVendedor();
+                        break;
+                    case "OBTENER_VENDEDOR":
+                        manejarObtenerVendedor();
+                        break;
+                    case "ACTUALIZAR_VENDEDOR":
+                        manejarActualizarVendedor();
+                        break;
+                    case "ELIMINAR_VENDEDOR":
+                        manejarEliminarVendedor();
+                        break;
+                    case "AGREGAR_PRODUCTO":
+                        manejarAgregarProducto();
+                        break;
+                    case "AGREGAR_PUBLICACION":
+                        manejarAgregarPublicacion();
+                        break;
+                    case "OBTENER_CONTACTOS":
+                        manejarObtenerContactos();
+                        break;
                     default:
                         LOGGER.warning("Tipo de mensaje desconocido: " + tipoMensaje);
                         break;
                 }
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | InterruptedException e) {
             LOGGER.log(Level.SEVERE, "Error en la conexión con el cliente", e);
         } finally {
             cerrarConexion();
@@ -101,6 +122,75 @@ public class ManejadorCliente implements Runnable {
                 LOGGER.log(Level.WARNING, "Error al enviar mensaje a " + cliente.nombreUsuario, e);
             }
         }
+    }
+
+    private void manejarCrearVendedor() throws IOException, ClassNotFoundException, InterruptedException {
+        Vendedor nuevoVendedor = (Vendedor) entrada.readObject();
+        boolean exito = MetodosCrud.agregarVendedor(nuevoVendedor);
+        salida.writeBoolean(exito);
+        if (exito) {
+            salida.writeObject(nuevoVendedor);
+        }
+        salida.flush();
+        LOGGER.info("Creación de vendedor " + (exito ? "exitosa" : "fallida") + ": " + nuevoVendedor.getUsername());
+    }
+
+    private void manejarObtenerVendedor() throws IOException, ClassNotFoundException {
+        String id = (String) entrada.readObject();
+        Vendedor vendedor = MetodosCrud.obtenerVendedor(id);
+        boolean exito = (vendedor != null);
+        salida.writeBoolean(exito);
+        if (exito) {
+            salida.writeObject(vendedor);
+        }
+        salida.flush();
+        LOGGER.info("Obtención de vendedor " + (exito ? "exitosa" : "fallida") + ": " + id);
+    }
+
+    private void manejarActualizarVendedor() throws IOException, ClassNotFoundException, InterruptedException {
+        Vendedor vendedorActualizado = (Vendedor) entrada.readObject();
+        boolean exito =MetodosCrud.actualizarVendedor(vendedorActualizado);
+        salida.writeBoolean(exito);
+        salida.flush();
+        LOGGER.info("Actualización de vendedor " + (exito ? "exitosa" : "fallida") + ": " + vendedorActualizado.getUsername());
+    }
+
+    private void manejarEliminarVendedor() throws IOException, ClassNotFoundException, InterruptedException {
+        String id = (String) entrada.readObject();
+        boolean exito = MetodosCrud.eliminarVendedor(id);
+        salida.writeBoolean(exito);
+        salida.flush();
+        LOGGER.info("Eliminación de vendedor " + (exito ? "exitosa" : "fallida") + ": " + id);
+    }
+
+    private void manejarAgregarProducto() throws IOException, ClassNotFoundException {
+        String idVendedor = (String) entrada.readObject();
+        Producto producto = (Producto) entrada.readObject();
+        boolean exito = SistemaMarketPlace.agregarProducto(idVendedor, producto);
+        salida.writeBoolean(exito);
+        salida.flush();
+        LOGGER.info("Agregar producto " + (exito ? "exitoso" : "fallido") + " para vendedor: " + idVendedor);
+    }
+
+    private void manejarAgregarPublicacion() throws IOException, ClassNotFoundException {
+        String idVendedor = (String) entrada.readObject();
+        Publicacion publicacion = (Publicacion) entrada.readObject();
+        boolean exito = SistemaMarketPlace.agregarPublicacion(idVendedor, publicacion);
+        salida.writeBoolean(exito);
+        salida.flush();
+        LOGGER.info("Agregar publicación " + (exito ? "exitosa" : "fallida") + " para vendedor: " + idVendedor);
+    }
+
+    private void manejarObtenerContactos() throws IOException, ClassNotFoundException {
+        String idVendedor = (String) entrada.readObject();
+        Map<String, Vendedor> contactos = SistemaMarketPlace.obtenerContactos(idVendedor);
+        boolean exito = (contactos != null);
+        salida.writeBoolean(exito);
+        if (exito) {
+            salida.writeObject(contactos);
+        }
+        salida.flush();
+        LOGGER.info("Obtención de contactos " + (exito ? "exitosa" : "fallida") + " para vendedor: " + idVendedor);
     }
 
     private void cerrarConexion() {

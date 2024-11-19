@@ -184,6 +184,17 @@ public class SistemaMarketPlace {
         return "Nuevo comentario creado por " + autor.getNombre() + ": " + contenido;
     }
 
+    public static boolean agregarPublicacion(String idVendedor, Publicacion publicacion) {
+        return true;
+    }
+
+    public static Map<String, Vendedor> obtenerContactos(String idVendedor) {
+        return null;
+    }
+
+    public static boolean agregarProducto(String idVendedor, Producto producto) {
+        return true;
+    }
 
 
     public Persistencia getPersistencia() {

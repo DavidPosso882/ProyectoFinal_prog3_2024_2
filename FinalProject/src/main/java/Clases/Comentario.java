@@ -1,8 +1,9 @@
 package Clases;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Comentario {
+public class Comentario implements Serializable {
     private String id;
     private String contenido;
     private LocalDateTime fecha;

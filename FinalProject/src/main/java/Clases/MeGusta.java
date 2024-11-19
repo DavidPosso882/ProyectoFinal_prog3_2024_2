@@ -1,8 +1,9 @@
 package Clases;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class MeGusta {
+public class MeGusta implements Serializable {
 
     private LocalDateTime fecha;
     private Vendedor autor;

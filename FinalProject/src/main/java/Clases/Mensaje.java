@@ -1,8 +1,9 @@
 package Clases;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Mensaje {
+public class Mensaje implements Serializable {
     private String id;
     private String contenido;
     private LocalDateTime fecha;

@@ -1,8 +1,9 @@
 package Clases;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Chat {
+public class Chat implements Serializable {
     private String id;
     private List<Vendedor> participantes;
     private List<Mensaje> mensajes;

@@ -1,5 +1,7 @@
 package Clases;
 
-public enum EstadoProducto {
+import java.io.Serializable;
+
+public enum EstadoProducto implements Serializable {
     VENDIDO, PUBLICADO, CANCELADO
 }

@@ -1,9 +1,11 @@
 package Clases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Publicacion {
+public class Publicacion implements Serializable {
+    private static final long serialVersionUID = 6700436383143282624L;
 
     private String id;
     private String contenido;
