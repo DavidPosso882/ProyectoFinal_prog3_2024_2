@@ -51,6 +51,9 @@ public class Producto implements Serializable {
         this.imagenVista=cargarImagenDesdeArchivo(imagen);
     }
 
+    public Producto() {
+    }
+
     public String getId() {
         return id;
     }
